@@ -1,0 +1,25 @@
+#include<stdio.h>
+
+int main()
+{
+
+int a,b;
+printf("A\n");
+
+a = fork();
+
+if(a == 0)
+{
+
+printf("B\n");
+
+a=fork();
+
+if(a == getppid())
+{
+printf("C\n");
+}
+
+}
+
+}
