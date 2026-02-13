@@ -45,7 +45,8 @@ int main(int argc, char *argv[]) // For command line arguments
 	
 	listen(sockfd, 5);
 	cl_len = sizeof(cli);
-	
+	while(1)
+	{
 	newsockfd = accept(sockfd, (struct sockaddr *) &cli, &cl_len);
 	
 	if(newsockfd < 0 )
@@ -65,6 +66,12 @@ int main(int argc, char *argv[]) // For command line arguments
 		bzero(buffer, 300); //Store message
 		
 		n = read(newsockfd, buffer, 300);
+
+		if(n == 0){
+    		printf("Client disconnected\n");
+    		break;
+		}
+
 		
 		if(n<0)
 		{
@@ -73,9 +80,11 @@ int main(int argc, char *argv[]) // For command line arguments
 		printf("Client : %s\n",buffer);
 		
 		bzero(buffer, 300);
-		fgets(buffer, 300, stdin); //Reply from server
-		
+		fgets(buffer, 300, stdin);//Reply from server
+	
+
 		n = write(newsockfd, buffer, strlen(buffer)); //Posts it over network
+
 		
 		if(n<0)
 		{
@@ -94,6 +103,7 @@ int main(int argc, char *argv[]) // For command line arguments
 	else 
 	{
 	close(newsockfd);
+	}
 	}
 	return 0;
 }
