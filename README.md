@@ -1,4 +1,4 @@
-# MULTI_CLI_SERV
+# MULTI_CLIENT_SERVER
 A Multiple Client-Server chat using Networking and System design concepts
 
 Multi-client TCP Socket Server (Using C)
